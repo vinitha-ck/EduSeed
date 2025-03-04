@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
     xmlns:tools="http://schemas.android.com/tools"
     package="com.vpk.eduseed"> <!-- Ensure this matches your Firebase package name -->
 
@@ -13,9 +12,6 @@
 
     <!-- If targeting Android 10+ (API 29+), use Scoped Storage instead -->
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
-=======
-    xmlns:tools="http://schemas.android.com/tools">
->>>>>>> 58ce0f97a1132423c4135e97f3d15f6d82e8d5b0
 
     <application
         android:allowBackup="true"
@@ -26,7 +22,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EduSeed"
         tools:targetApi="31">
-<<<<<<< HEAD
 
         <!-- Firebase Configuration -->
         <meta-data
@@ -62,19 +57,4 @@
         </activity>
 
     </application>
-
 </manifest>
-=======
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
-
-</manifest>
->>>>>>> 58ce0f97a1132423c4135e97f3d15f6d82e8d5b0
