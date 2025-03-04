@@ -1,6 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+<<<<<<< HEAD
     <style name="Theme.EduSeed" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+=======
+    <style name="Theme.EduSeed" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+>>>>>>> 58ce0f97a1132423c4135e97f3d15f6d82e8d5b0
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -10,7 +14,11 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
+<<<<<<< HEAD
         <item name="android:statusBarColor">#2776EA</item>
+=======
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+>>>>>>> 58ce0f97a1132423c4135e97f3d15f6d82e8d5b0
         <!-- Customize your theme here. -->
     </style>
 </resources>

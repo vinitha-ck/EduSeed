@@ -6,5 +6,12 @@
    See https://developer.android.com/about/versions/12/backup-restore
 -->
 <full-backup-content>
+<<<<<<< HEAD
 
+=======
+    <!--
+   <include domain="sharedpref" path="."/>
+   <exclude domain="sharedpref" path="device.xml"/>
+-->
+>>>>>>> 58ce0f97a1132423c4135e97f3d15f6d82e8d5b0
 </full-backup-content>

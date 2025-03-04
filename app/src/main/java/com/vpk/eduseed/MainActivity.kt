@@ -1,15 +1,22 @@
 package com.vpk.eduseed
+<<<<<<< HEAD
 import android.os.AsyncTask
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+=======
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+>>>>>>> 58ce0f97a1132423c4135e97f3d15f6d82e8d5b0
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+<<<<<<< HEAD
 
         val editTextEmail = findViewById<EditText>(R.id.editTextEmail)
         val sendButton = findViewById<Button>(R.id.sendButton)
@@ -45,3 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+=======
+    }
+}
+>>>>>>> 58ce0f97a1132423c4135e97f3d15f6d82e8d5b0
