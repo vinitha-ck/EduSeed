@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".ReportActivity">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:padding="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/toolbar_gradient"
+        app:logo="@drawable/baseline_insert_chart_24"
+        app:title="Report"
+        app:titleMarginStart="25dp"
+        app:titleTextColor="@color/white"
+        app:titleTextAppearance="@style/CustomToolbarTitleText"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
+        <!-- AutoCompleteTextView for selecting a student -->
+        <AutoCompleteTextView
+            android:id="@+id/studentAutoComplete"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Select Student"
+            android:background="@drawable/border"
+            android:padding="10dp"
+            android:inputType="text"
+            android:completionThreshold="1" />
+
+        <!-- Table Header and Entries -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp">
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TableLayout
+                    android:id="@+id/tableLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*">
+
+                    <!-- Header Row -->
+                    <TableRow
+                        android:background="@drawable/toolbar_gradient"
+                        android:padding="8dp">
+                        <TextView
+                            android:text="S.No"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:padding="8dp" />
+                        <TextView
+                            android:text="Date"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:padding="8dp"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:text="Time"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:padding="8dp"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:text="Student Name"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:padding="8dp"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:text="Topic"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:padding="8dp"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:text="Homework"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:padding="8dp"
+                            android:textSize="16sp"/>
+                    </TableRow>
+
+                    <!-- Table rows will be added dynamically -->
+                </TableLayout>
+            </HorizontalScrollView>
+        </ScrollView>
+
+        <!-- Save Changes Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Changes"
+            android:background="@drawable/button_gradient"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+</LinearLayout>

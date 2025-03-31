@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/toolbar_gradient">
+
+    <!-- Toolbar at the top -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:logo="@drawable/baseline_collections_bookmark_24"
+        app:title="Enrollments"
+        app:titleMarginStart="25dp"
+        app:titleTextColor="@color/white"
+        app:titleTextAppearance="@style/CustomToolbarTitleText" />
+
+    <!-- Centered Form Layout inside CardView -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="40dp"
+        app:cardElevation="8dp"
+        android:backgroundTint="@color/white"
+        android:elevation="10dp"
+        app:cardCornerRadius="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter details"
+                android:letterSpacing="0.04"
+                android:fontFamily="@font/poppins"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="20dp" />
+
+            <EditText
+                android:id="@+id/studentname"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/border"
+                android:hint="Student Name"
+                android:paddingStart="20dp"
+                android:drawableStart="@drawable/baseline_supervisor_account_24"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:padding="8dp"
+                android:drawablePadding="8dp" />
+
+            <EditText
+                android:id="@+id/instructorname"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/border"
+                android:hint="Instructor Name"
+                android:paddingStart="20dp"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:padding="8dp"
+                android:drawablePadding="8dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/courses_list"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/border"
+                android:hint="Courses"
+                android:paddingStart="20dp"
+                android:drawableStart="@drawable/baseline_menu_book_24"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:padding="8dp"
+                android:drawablePadding="8dp"
+                android:inputType="none"
+                android:focusable="false"
+                android:clickable="true" />
+
+            <EditText
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/border"
+                android:hint="Class Time and Day"
+                android:paddingStart="20dp"
+                android:drawableStart="@drawable/baseline_access_time_24"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:padding="8dp"
+                android:drawablePadding="8dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/editTextSelectDays"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/border"
+                android:hint="Select Days"
+                android:inputType="none"
+                android:focusable="false"
+                android:paddingStart="20dp"
+                android:drawableStart="@drawable/baseline_access_time_24"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:padding="8dp"
+                android:drawablePadding="8dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/batchTypeDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/border"
+                android:hint="Batch Type"
+                android:paddingStart="20dp"
+                android:drawableStart="@drawable/baseline_calendar_month_24"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:padding="8dp"
+                android:drawablePadding="8dp"
+                android:inputType="none"
+                android:focusable="false"
+                android:clickable="true" />
+
+            <!-- Submit Button inside Card -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:background="@drawable/button_gradient"
+                android:text="Submit"
+                android:letterSpacing="0.1"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

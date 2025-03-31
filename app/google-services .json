@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "312410402844",
+    "firebase_url": "https://eduseed-d1874-default-rtdb.firebaseio.com",
+    "project_id": "eduseed-d1874",
+    "storage_bucket": "eduseed-d1874.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312410402844:android:1a09678e73da1a98d56fd9",
+        "android_client_info": {
+          "package_name": "com.vpk.eduseed"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMHgmvGYwI9Kipgac4JX9lzTJS-AJa-Ls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

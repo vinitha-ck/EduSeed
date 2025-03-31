@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home"
+        app:logo="@drawable/home"/>
+    <item
+        android:id="@+id/nav_profile"
+        android:title="Profile"
+        app:logo="@drawable/baseline_person_24"/>
+    <item
+        android:id="@+id/nav_material"
+        android:title="Materials"
+        app:logo="@drawable/baseline_collections_bookmark_24"/>
+
+    <item
+        android:id="@+id/nav_entry"
+        android:title="Entry"
+        app:logo="@drawable/baseline_edit_note_24"/>
+
+    <item
+        android:id="@+id/nav_session"
+        android:title="Sessions"
+        app:logo="@drawable/baseline_collections_bookmark_24"/>
+    <item
+        android:id="@+id/nav_admin"
+        android:title="Admin Panel"
+        app:logo="@drawable/baseline_admin_panel_settings_24"/>
+    <item
+        android:id="@+id/nav_log_out"
+        android:title="Log_out"
+        app:logo="@drawable/baseline_logout_24"/>
+</menu>
