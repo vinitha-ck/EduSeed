@@ -20,9 +20,7 @@ class AccessAdmin : DialogFragment() {
         editTextEmail = view.findViewById(R.id.editTextSubtext)
         val cancelButton = view.findViewById<Button>(R.id.cancelButton)
         val saveButton = view.findViewById<Button>(R.id.saveButton)
-
         cancelButton.setOnClickListener { dismiss() }
-
         saveButton.setOnClickListener {
             val recipientEmail = editTextEmail.text.toString().trim()
             val role = view.findViewById<EditText>(R.id.editTextRole).text.toString().trim()
