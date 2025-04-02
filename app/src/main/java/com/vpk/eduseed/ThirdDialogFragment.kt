@@ -1,16 +1,13 @@
 package com.vpk.eduseed
 
 import android.app.Dialog
-import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.util.*
 
 class ThirdDialogFragment : DialogFragment() {
     private lateinit var editTextText: EditText
@@ -25,44 +22,38 @@ class ThirdDialogFragment : DialogFragment() {
             throw RuntimeException("$context must implement ThirdDialogListener")
         }
     }
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val inflater = requireActivity().layoutInflater
-        val view: View = inflater.inflate(R.layout.activity_third, null)
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.activity_third, null)
         editTextText = view.findViewById(R.id.editTextText)
         editTextSubtext = view.findViewById(R.id.editTextSubtext)
-        val cancelButton = view.findViewById<Button>(R.id.cancelButton)
-        val saveButton = view.findViewById<Button>(R.id.saveButton)
 
+        val text = arguments?.getString("text", "") ?: ""
+        val subtext = arguments?.getString("subtext", "") ?: ""
 
-        // Cancel Button Click
-        cancelButton.setOnClickListener {
-            dismiss()
+        editTextText.setText(text)
+        editTextSubtext.setText(subtext)
+
+        val builder = AlertDialog.Builder(requireContext())
+            .setView(view)
+            .setCancelable(false)
+
+        val dialog = builder.create()
+
+        view.findViewById<Button>(R.id.cancelButton).setOnClickListener {
+            dialog.dismiss()
         }
 
-        // Save Button Click
-        saveButton.setOnClickListener {
-            val updatedText = editTextText.text.toString()
-            val updatedSubtext = editTextSubtext.text.toString()
-            listener?.onTaskSaved(updatedText, updatedSubtext)
-            dismiss()
+        view.findViewById<Button>(R.id.saveButton).setOnClickListener {
+            listener?.onTaskSaved(editTextText.text.toString(), editTextSubtext.text.toString())
+            dialog.dismiss()
         }
 
-        val dialog = Dialog(requireContext())
-        dialog.setContentView(view)
-
-        dialog.window?.setLayout(
-            (resources.displayMetrics.widthPixels * 0.9).toInt(),
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         return dialog
     }
 
     interface ThirdDialogListener {
         fun onTaskSaved(text: String, subtext: String)
+        fun onTaskUpdated(position: Int, text: String, subtext: String)
     }
-
-
 }

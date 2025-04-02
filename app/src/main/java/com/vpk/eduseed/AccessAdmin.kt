@@ -11,56 +11,50 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.GenericTypeIndicator
 
 class AccessAdmin : DialogFragment() {
-
     private lateinit var editTextEmail: EditText
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.activity_access_admin, container, false)
 
         editTextEmail = view.findViewById(R.id.editTextSubtext)
         val cancelButton = view.findViewById<Button>(R.id.cancelButton)
         val saveButton = view.findViewById<Button>(R.id.saveButton)
-
         cancelButton.setOnClickListener { dismiss() }
-
         saveButton.setOnClickListener {
             val recipientEmail = editTextEmail.text.toString().trim()
-            if (recipientEmail.isNotEmpty()) {
-                saveEmailToDatabase(recipientEmail)
+            val role = view.findViewById<EditText>(R.id.editTextRole).text.toString().trim()
+            if (recipientEmail.isNotEmpty() && role.isNotEmpty()) {
+                saveEmailToDatabase(recipientEmail, role)
             } else {
-                Toast.makeText(requireContext(), "Enter an email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Enter both email and role", Toast.LENGTH_SHORT).show()
             }
         }
-
         return view
     }
 
-    private fun saveEmailToDatabase(email: String) {
+    private fun saveEmailToDatabase(email: String, role: String) {
         val database = FirebaseDatabase.getInstance()
         val ref = database.getReference("Authorize")
-
         ref.get().addOnSuccessListener { snapshot ->
-            val emailList = snapshot.getValue(object : GenericTypeIndicator<List<String>>() {})?.toMutableList() ?: mutableListOf()
-
-            if (!emailList.contains(email)) {
-                emailList.add(email)
-                ref.setValue(emailList)
-                    .addOnSuccessListener {
-                        Log.d("Firebase", "Email added successfully!")
-                        SendEmailTask().execute(email)
-                    }
-                    .addOnFailureListener { e -> Log.e("Firebase", "Failed to add email", e) }
-            } else {
-                Log.d("Firebase", "Email already exists.")
-                Toast.makeText(requireContext(), "Email already authorized", Toast.LENGTH_SHORT).show()
-            }
+            val newKey = "auth_${snapshot.childrenCount + 1}" // Generate unique key
+            val userEntry = mapOf(
+                "email" to email,
+                "role" to role
+            )
+            ref.child(newKey).setValue(userEntry)
+                .addOnSuccessListener {
+                    Log.d("Firebase", "Email and role added successfully!")
+                    SendEmailTask().execute(email)
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Firebase", "Failed to add email and role", e)
+                }
         }.addOnFailureListener { e ->
             Log.e("Firebase", "Failed to fetch data", e)
         }
     }
+
 
     override fun onStart() {
         super.onStart()

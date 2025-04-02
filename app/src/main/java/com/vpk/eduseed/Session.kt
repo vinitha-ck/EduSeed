@@ -1,3 +1,4 @@
 package com.vpk.eduseed
 
-data class Session(val title: String, val subTitle: String)
+
+data class Session(val studentName: String, val courseName: String, val classCount: String)

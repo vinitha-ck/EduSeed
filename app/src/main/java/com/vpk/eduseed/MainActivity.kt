@@ -1,33 +1,116 @@
 package com.vpk.eduseed
-<<<<<<< HEAD
+
+import android.app.AlertDialog
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-=======
-
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
->>>>>>> 58ce0f97a1132423c4135e97f3d15f6d82e8d5b0
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var database: DatabaseReference
+    private lateinit var btnAddFolder: Button
+    private lateinit var btnAccessAdmin: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-<<<<<<< HEAD
 
-        val editTextEmail = findViewById<EditText>(R.id.editTextEmail)
-        val sendButton = findViewById<Button>(R.id.sendButton)
+        btnAddFolder = findViewById(R.id.btnAddFolder)
+        btnAccessAdmin = findViewById(R.id.btnAccessAdmin)
 
-        sendButton.setOnClickListener {
-            val recipientEmail = editTextEmail.text.toString().trim()
-            if (recipientEmail.isNotEmpty()) {
-                SendEmailTask().execute(recipientEmail)
+        database = FirebaseDatabase.getInstance().reference
+
+        btnAddFolder.setOnClickListener { showAddFolderDialog() }
+        btnAccessAdmin.setOnClickListener { showAddFolderDialog() }
+    }
+
+    // Function to show Folder Adding Dialog
+    private fun showAddFolderDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Add New Folder")
+
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_folder, null)
+        builder.setView(dialogView)
+
+        val edtFolderName = dialogView.findViewById<EditText>(R.id.edtFolderName)
+        val edtFolderLink = dialogView.findViewById<EditText>(R.id.edtFolderLink)
+
+        builder.setPositiveButton("Submit") { dialog, _ ->
+            val folderName = edtFolderName.text.toString().trim()
+            val folderLink = edtFolderLink.text.toString().trim()
+
+            if (folderName.isNotEmpty() && folderLink.isNotEmpty()) {
+                database.child("Materials").child(folderName).setValue(folderLink)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Folder Added Successfully!", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Failed to Add Folder", Toast.LENGTH_SHORT).show()
+                    }
             } else {
-                Toast.makeText(this, "Enter an email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter both fields!", Toast.LENGTH_SHORT).show()
             }
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
+        builder.create().show()
+    }
+
+    // Function to show Admin Authorization Dialog
+    private fun showAccessAdminDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Grant Access")
+
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_folder, null)
+        builder.setView(dialogView)
+
+        val edtEmail = dialogView.findViewById<EditText>(R.id.edtFolderName)
+        val edtRole = dialogView.findViewById<EditText>(R.id.edtFolderLink)
+
+        builder.setPositiveButton("Admit") { dialog, _ ->
+            val email = edtEmail.text.toString().trim()
+            val role = edtRole.text.toString().trim()
+
+            if (email.isNotEmpty() && role.isNotEmpty()) {
+                saveEmailToDatabase(email, role)
+            } else {
+                Toast.makeText(this, "Enter both email and role", Toast.LENGTH_SHORT).show()
+            }
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
+        builder.create().show()
+    }
+
+    private fun saveEmailToDatabase(email: String, role: String) {
+        val ref = database.child("Authorize")
+
+        ref.get().addOnSuccessListener { snapshot ->
+            val newKey = "auth_${snapshot.childrenCount + 1}"
+
+            val userEntry = mapOf(
+                "email" to email,
+                "role" to role
+            )
+
+            ref.child(newKey).setValue(userEntry)
+                .addOnSuccessListener {
+                    Log.d("Firebase", "Email and role added successfully!")
+                    SendEmailTask().execute(email)
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Firebase", "Failed to add email and role", e)
+                }
+        }.addOnFailureListener { e ->
+            Log.e("Firebase", "Failed to fetch data", e)
         }
     }
 
@@ -35,7 +118,12 @@ class MainActivity : AppCompatActivity() {
         override fun doInBackground(vararg params: String?): Boolean {
             return try {
                 val sender = GMailSender("vinitha5314@gmail.com", "quev tvrc vvjh rhdd")
-                sender.sendMail(params[0]!!, "Test Email", "Hello, this is a test email from Android App.")
+                sender.sendMail(params[0]!!, "Access Granted",
+                    "Access granted! You now have permission to use our application.\n\n" +
+                            "Download the app here: https://play.google.com/store/apps/details?id=com.example.app\n\n" +
+                            "Please register and set your password, then sign in to the app or use Google Sign-In for quick access.\n\n" +
+                            "If you have any doubts, feel free to reach out to us at eduseed@gmail.com.")
+
                 true
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -45,14 +133,10 @@ class MainActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: Boolean) {
             if (result) {
-                Toast.makeText(applicationContext, "Email Sent", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Email Sent", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(applicationContext, "Failed to send email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Failed to send email", Toast.LENGTH_SHORT).show()
             }
         }
     }
 }
-=======
-    }
-}
->>>>>>> 58ce0f97a1132423c4135e97f3d15f6d82e8d5b0
